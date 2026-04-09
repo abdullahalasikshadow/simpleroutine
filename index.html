@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Routine – ABDULLAH AL ASIK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 16px;
+      }
+
+      h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #38bdf8;
+        margin-bottom: 4px;
+      }
+
+      .sub {
+        font-size: 13px;
+        color: #64748b;
+        margin-bottom: 24px;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 980px;
+        overflow-x: auto;
+        border-radius: 14px;
+        border: 1px solid #1e3a5f;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 620px;
+      }
+
+      thead th {
+        background: #1e3a5f;
+        padding: 13px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #38bdf8;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid #2a4f7a;
+        text-align: center;
+      }
+
+      thead th:first-child {
+        text-align: left;
+        padding-left: 18px;
+        min-width: 120px;
+        color: #94a3b8;
+      }
+
+      tbody tr {
+        border-bottom: 1px solid #1e3a5f;
+      }
+
+      tbody tr:last-child {
+        border-bottom: none;
+      }
+
+      tbody tr:hover {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      td {
+        padding: 8px;
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      td:first-child {
+        text-align: left;
+        padding-left: 18px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #cbd5e1;
+        background: #131f35;
+        border-right: 2px solid #1e3a5f;
+        white-space: nowrap;
+      }
+
+      .today-row td:first-child {
+        color: #38bdf8;
+        background: rgba(56, 189, 248, 0.07);
+      }
+
+      .today-row {
+        background: rgba(56, 189, 248, 0.03);
+      }
+
+      .card {
+        border-radius: 10px;
+        padding: 10px 10px;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.4;
+        transition: transform 0.15s;
+      }
+
+      .card:hover {
+        transform: translateY(-2px);
+      }
+
+      .card .teacher {
+        font-size: 11px;
+        font-weight: 400;
+        margin-top: 3px;
+        opacity: 0.75;
+      }
+
+      .doe {
+        background: rgba(167, 139, 250, 0.15);
+        color: #c4b5fd;
+        border-left: 3px solid #a78bfa;
+      }
+
+      .sd {
+        background: rgba(56, 189, 248, 0.15);
+        color: #7dd3fc;
+        border-left: 3px solid #38bdf8;
+      }
+
+      .spss {
+        background: rgba(250, 204, 21, 0.15);
+        color: #fde68a;
+        border-left: 3px solid #facc15;
+      }
+
+      .reg {
+        background: rgba(251, 113, 133, 0.15);
+        color: #fda4af;
+        border-left: 3px solid #fb7185;
+      }
+
+      .si {
+        background: rgba(52, 211, 153, 0.15);
+        color: #6ee7b7;
+        border-left: 3px solid #34d399;
+      }
+
+      .as {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fcd34d;
+        border-left: 3px solid #fbbf24;
+      }
+
+      .empty {
+        background: transparent;
+      }
+
+      footer {
+        margin-top: 20px;
+        font-size: 11px;
+        color: #334155;
+      }
+
+      /* ── Clock Widget ── */
+      #clock-widget {
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid #1e3a5f;
+        border-radius: 16px;
+        padding: 10px 18px 10px 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(56,189,248,0.08);
+        margin-bottom: 14px;
+        animation: clockSlideIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+      }
+
+      @keyframes clockSlideIn {
+        from { opacity: 0; transform: translateY(-12px) scale(0.92); }
+        to   { opacity: 1; transform: translateY(0)    scale(1);    }
+      }
+
+      #clock-icon {
+        width: 32px;
+        height: 32px;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      #clock-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      #clock-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1;
+      }
+
+      #clock-time {
+        font-size: 20px;
+        font-weight: 700;
+        color: #38bdf8;
+        letter-spacing: 1px;
+        font-variant-numeric: tabular-nums;
+        animation: timePulse 1s ease-in-out infinite alternate;
+      }
+
+      @keyframes timePulse {
+        from { text-shadow: 0 0 6px rgba(56,189,248,0.3); }
+        to   { text-shadow: 0 0 14px rgba(56,189,248,0.7); }
+      }
+
+      #clock-colon {
+        display: inline-block;
+        animation: blink 1s step-start infinite;
+      }
+
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0; }
+      }
+
+      #clock-ampm {
+        font-size: 11px;
+        font-weight: 600;
+        color: #7dd3fc;
+        margin-left: 2px;
+        vertical-align: super;
+        letter-spacing: 0.5px;
+      }
+
+      #clock-date {
+        font-size: 10px;
+        color: #475569;
+        margin-top: 3px;
+        letter-spacing: 0.3px;
+      }
+
+      /* Analog clock face */
+      .clock-face { fill: rgba(30,58,95,0.7); }
+      .clock-rim  { fill: none; stroke: #2a4f7a; stroke-width: 1.5; }
+      .hand-hour  { stroke: #7dd3fc; stroke-width: 2; stroke-linecap: round; }
+      .hand-min   { stroke: #38bdf8; stroke-width: 1.5; stroke-linecap: round; }
+      .hand-sec   { stroke: #fb7185; stroke-width: 1; stroke-linecap: round; }
+      .clock-dot  { fill: #38bdf8; }
+
+      @media (max-width: 500px) {
+        #clock-widget { top: 10px; right: 10px; padding: 8px 12px 8px 10px; }
+        #clock-time   { font-size: 16px; }
+        #clock-icon   { width: 26px; height: 26px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- clock moved below, placeholder removed -->
+      <div id="clock-icon">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" class="clock-face"/>
+          <circle cx="20" cy="20" r="18" class="clock-rim"/>
+          <!-- tick marks -->
+          <line x1="20" y1="4"  x2="20" y2="7"  stroke="#2a4f7a" stroke-width="1.5"/>
+          <line x1="20" y1="33" x2="20" y2="36" stroke="#2a4f7a" stroke-width="1.5"/>
+          <line x1="4"  y1="20" x2="7"  y2="20" stroke="#2a4f7a" stroke-width="1.5"/>
+          <line x1="33" y1="20" x2="36" y2="20" stroke="#2a4f7a" stroke-width="1.5"/>
+          <!-- hands -->
+          <line id="hand-h" x1="20" y1="20" x2="20" y2="10" class="hand-hour"/>
+          <line id="hand-m" x1="20" y1="20" x2="20" y2="6"  class="hand-min"/>
+          <line id="hand-s" x1="20" y1="20" x2="20" y2="5"  class="hand-sec"/>
+          <circle cx="20" cy="20" r="2" class="clock-dot"/>
+        </svg>
+      </div>
+      <div id="clock-text">
+        <div id="clock-time">
+          <span id="ct-h">--</span><span id="clock-colon">:</span><span id="ct-m">--</span><span id="clock-colon2">:</span><span id="ct-s">--</span>
+          <span id="clock-ampm"></span>
+        </div>
+        <div id="clock-date">Loading…</div>
+      </div>
+    </div>
+
+    <h1>ABDULLAH AL ASIK</h1>
+    <p class="sub">Honours 3rd Year · Statistics · Rajshahi College</p>
+    <div class="wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>9:20 – 10:10</th>
+            <th>10:10 – 11:00</th>
+            <th>11:00 – 11:50</th>
+            <th>11:50 – 12:40</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="r0">
+            <td>Sunday</td>
+            <td class="empty"></td>
+            <td>
+              <div class="card doe">Design of Experiments <div class="teacher">Usha Ma'am</div>
+              </div>
+            </td>
+            <td>
+              <div class="card sd">Sampling Distribution <div class="teacher">Baki Sir</div>
+              </div>
+            </td>
+            <td>
+              <div class="card spss">SPSS <div class="teacher">Manik Sir</div>
+              </div>
+            </td>
+          </tr>
+          <tr id="r1">
+            <td>Monday</td>
+            <td>
+              <div class="card reg">Regression Analysis <div class="teacher">Nurnnobe Sir</div>
+              </div>
+            </td>
+            <td>
+              <div class="card si">Statistical Inference <div class="teacher">Nazmul Sir</div>
+              </div>
+            </td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+          </tr>
+          <tr id="r2">
+            <td>Tuesday</td>
+            <td>
+              <div class="card reg">Regression Analysis <div class="teacher">Nurnnobe Sir</div>
+              </div>
+            </td>
+            <td>
+              <div class="card as">Applied Statistics <div class="teacher">Jubaida Ma'am</div>
+              </div>
+            </td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+          </tr>
+          <tr id="r3">
+            <td>Wednesday</td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td>
+              <div class="card as">Applied Statistics <div class="teacher">Jubaida Ma'am</div>
+              </div>
+            </td>
+            <td>
+              <div class="card doe">Design of Experiments <div class="teacher">Usha Ma'am</div>
+              </div>
+            </td>
+          </tr>
+          <tr id="r4">
+            <td>Thursday</td>
+            <td class="empty"></td>
+            <td>
+              <div class="card si">Statistical Inference <div class="teacher">Nazmul Sir</div>
+              </div>
+            </td>
+            <td>
+              <div class="card sd">Sampling Distribution <div class="teacher">Baki Sir</div>
+              </div>
+            </td>
+            <td>
+              <div class="card spss">SPSS <div class="teacher">Manik Sir</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <footer>Friday & Saturday — Ghum😴</footer>
+ 
+    <script>
+      const map = {
+        0: 'r0',
+        1: 'r1',
+        2: 'r2',
+        3: 'r3',
+        4: 'r4'
+      };
+      const d = new Date().getDay();
+      if (map[d]) document.getElementById(map[d]).classList.add('today-row');
+    </script>
+
+    <!-- Clock Script -->
+    <script>
+      const days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+      const elH    = document.getElementById('ct-h');
+      const elM    = document.getElementById('ct-m');
+      const elS    = document.getElementById('ct-s');
+      const elAmpm = document.getElementById('clock-ampm');
+      const elDate = document.getElementById('clock-date');
+      const elC2   = document.getElementById('clock-colon2');
+
+      const handH  = document.getElementById('hand-h');
+      const handM  = document.getElementById('hand-m');
+      const handS  = document.getElementById('hand-s');
+
+      function pad(n){ return String(n).padStart(2,'0'); }
+
+      function rotLine(el, cx, cy, angle, len){
+        const rad = (angle - 90) * Math.PI / 180;
+        el.setAttribute('x2', cx + len * Math.cos(rad));
+        el.setAttribute('y2', cy + len * Math.sin(rad));
+      }
+
+      function tick(){
+        const now  = new Date();
+        let h = now.getHours();
+        const m    = now.getMinutes();
+        const s    = now.getSeconds();
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+
+        elH.textContent    = pad(h);
+        elM.textContent    = pad(m);
+        elS.textContent    = pad(s);
+        elAmpm.textContent = ampm;
+
+        const dayName = days[now.getDay()];
+        const dateStr = `${dayName}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+        elDate.textContent = dateStr;
+
+        const hDeg = (h % 12) * 30 + m * 0.5;
+        const mDeg = m * 6 + s * 0.1;
+        const sDeg = s * 6;
+
+        rotLine(handH, 20, 20, hDeg, 9);
+        rotLine(handM, 20, 20, mDeg, 12);
+        rotLine(handS, 20, 20, sDeg, 13);
+      }
+
+      tick();
+      setInterval(tick, 1000);
+
+      /* blink second colon */
+      setInterval(()=>{
+        elC2.style.opacity = elC2.style.opacity === '0' ? '1' : '0';
+      }, 1000);
+    </script>
+  </body>
+</html>
